@@ -3,11 +3,9 @@ import Movies from './components/Movies'
 import { useMovies } from './hooks/useMovies'
 import { useSearch } from './hooks/useSearch'
 
-// const API = `https://www.omdbapi.com/?apikey=%${process.env.API_KEY}&s=the%20end`
-
 const App = () => {
-  const { movies: MappedMovies } = useMovies()
   const { query, error, Submit, Change } = useSearch()
+  const { movies: MappedMovies } = useMovies({ query })
 
   const handleSubmit = (e) => {
     Submit(e)
