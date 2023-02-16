@@ -1,0 +1,18 @@
+.movie-item{
+    background-color: #1a1a1a;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.movie-item h3{
+    font-size: 16px;
+}
+.card-content-container{
+    display: flex;
+    flex-direction: column;
+    
+}
+.card-image-container{
+    object-fit: cover;
+    max-height: 22rem;
+    overflow: hidden;
+}

@@ -1,5 +1,6 @@
 import React from 'react'
 import MovieCard from '../MovieCard'
+import './Movies.css'
 
 function NoMovies () {
   return (
@@ -9,7 +10,7 @@ function NoMovies () {
 
 const MovieList = ({ movies }) => {
   return (
-    <ul>
+    <ul className='movies-container'>
       {movies.map(movie => <MovieCard key={movie.id} movie={movie} />)}
     </ul>
   )
