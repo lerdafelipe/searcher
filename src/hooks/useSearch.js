@@ -2,15 +2,9 @@ import { useState, useEffect, useRef } from 'react'
 
 export const useSearch = () => {
   const [query, setQuery] = useState('')
+  const [search, setSearch] = useState('')
   const [error, setError] = useState(null)
   const isFirstInput = useRef(true)
-
-  const Submit = (e) => {
-    e.preventDefault()
-    const data = new FormData(e.target)
-    const value = data.get('search')
-    console.log(value)
-  }
 
   const Change = (e) => {
     const currentQuery = e.target.value
@@ -34,13 +28,15 @@ export const useSearch = () => {
       return
     }
 
-    if (query.length < 3) {
+    if (query.length <= 3) {
       setError('No se puede ejecutar una query con menos de tres caracteres')
       return
     }
 
+    setSearch(query)
+
     setError(null)
   }, [query])
 
-  return { error, query, Submit, Change }
+  return { error, query, Change, search }
 }

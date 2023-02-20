@@ -8,7 +8,6 @@ pnpm-debug.log*
 lerna-debug.log*
 
 .env
-/src/logic
 
 node_modules
 dist

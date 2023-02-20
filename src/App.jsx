@@ -4,11 +4,12 @@ import { useMovies } from './hooks/useMovies'
 import { useSearch } from './hooks/useSearch'
 
 const App = () => {
-  const { query, error, Submit, Change } = useSearch()
-  const { movies: MappedMovies } = useMovies({ query })
+  const { query, error, Change, search } = useSearch()
+  const { movies: MappedMovies, getMovies, loading } = useMovies({ search })
 
   const handleSubmit = (e) => {
-    Submit(e)
+    e.preventDefault()
+    getMovies()
   }
 
   const handleChange = (e) => {
@@ -24,7 +25,11 @@ const App = () => {
       </form>
       {error ? <p style={{ color: 'red' }}>{error}</p> : ''}
       <section>
+
+        {loading ? <div className='loader'><div /></div> : ''}
+
         <Movies MappedMovies={MappedMovies} />
+
       </section>
     </div>
   )

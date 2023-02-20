@@ -1,23 +1,27 @@
-import { useState, useEffect } from 'react'
+import { useState, useRef } from 'react'
+import { searchMovies } from './../logic/movies'
 
-// const API = `https://www.omdbapi.com/?apikey=${import.meta.env.VITE_API_KEY}&s=the%20end`
+export const useMovies = ({ search }) => {
+  const [movies, setMovies] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [errorSearch, setErrorSearch] = useState(null)
+  const previousSearch = useRef(search)
 
-export const useMovies = ({ query }) => {
-  const [moviesDB, setMoviesDB] = useState([])
+  const getMovies = async () => {
+    if (previousSearch.current === search) return
 
-  const movies = moviesDB?.map(movie => ({
-    id: movie.imdbID,
-    poster: movie.Poster,
-    title: movie.Title,
-    year: movie.Year,
-    type: movie.Type
-  }))
-
-  useEffect(() => {
-    fetch(`https://www.omdbapi.com/?apikey=${import.meta.env.VITE_API_KEY}&s=${query}`)
-      .then(res => res.json())
-      .then(data => setMoviesDB(data.Search))
-  }, [query])
-
-  return { movies }
+    setLoading(true)
+    try {
+      previousSearch.current = search
+      const newMovies = await searchMovies({ search })
+      setMovies(newMovies)
+      setErrorSearch(null)
+    } catch {
+      setErrorSearch('Error searching movies')
+    } finally {
+      // el finally se ejecuta en el try y en el catch
+      setLoading(false)
+    }
+  }
+  return { movies, getMovies, loading, errorSearch }
 }
