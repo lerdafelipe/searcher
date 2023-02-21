@@ -16,6 +16,7 @@
     height: 18rem;
     overflow: hidden;
     position: relative;
+    background-color: #1a1a2a90;
 }
 .card-image-container img{
   width: 100%;

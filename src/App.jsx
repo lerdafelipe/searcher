@@ -9,11 +9,12 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    getMovies()
+    getMovies({ search })
   }
 
   const handleChange = (e) => {
     Change(e)
+    getMovies({ search: e.target.value })
   }
 
   return (
@@ -21,7 +22,7 @@ const App = () => {
       <h2>App movie searcher</h2>
       <form onSubmit={handleSubmit}>
         <input onChange={handleChange} value={query} name='search' placeholder='Avengers, Spiderman, Star Wars...' />
-        <button>Search</button>
+
       </form>
       {error ? <p style={{ color: 'red' }}>{error}</p> : ''}
       <section>

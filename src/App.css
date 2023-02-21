@@ -20,7 +20,6 @@ button {
     color: #cfe3e3;
     background-color: #1a1a1a;
     outline: none;
-    max-width: 300px;
   }
   form{
     display: flex;
@@ -51,5 +50,16 @@ button {
     }
     100%{
       rotate: 360deg;
+    }
+  }
+
+  @media (max-width: 335px) {
+    form{
+      gap: 5px;
+      max-width: 100%;
+    }
+    input, button{
+      padding: 0.5em 0.5em;
+      font-size: 0.9em;
     }
   }
